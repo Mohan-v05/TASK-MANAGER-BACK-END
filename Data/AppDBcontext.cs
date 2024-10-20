@@ -10,7 +10,7 @@ namespace Activity26.Data
         public AppDBcontext(DbContextOptions<AppDBcontext> options) : base(options) { }
 
         public DbSet<TaskItem> TaskItems { get; set; }
-      
+        public DbSet<User> Users { get; set; }
 
     }
 }
