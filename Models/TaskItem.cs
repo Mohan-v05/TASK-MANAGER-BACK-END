@@ -16,5 +16,11 @@ namespace Activity26.Models
 
         [Required]
         public string Priority { get; set; }
+
+        public User? User { get; set; }
+
+        public int? UserId {  get; set; }
+
+
     }
 }

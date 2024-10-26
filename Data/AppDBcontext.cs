@@ -12,5 +12,13 @@ namespace Activity26.Data
         public DbSet<TaskItem> TaskItems { get; set; }
         public DbSet<User> Users { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasMany(U => U.TaskItem).WithOne(T=>T.User).HasForeignKey(T=>T.UserId);
+            modelBuilder.Entity<User>().HasOne(U =>U.Address).WithOne(T=>T.user).HasForeignKey<Address>(A=>A.userId);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

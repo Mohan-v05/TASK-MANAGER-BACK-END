@@ -25,14 +25,14 @@ namespace Activity26.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(u=>u.Address).Include(u=>u.TaskItem).ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.Include(u => u.Address).Include(u => u.TaskItem).FirstOrDefaultAsync(u=>u.id==id);
 
             if (user == null)
             {

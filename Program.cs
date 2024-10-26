@@ -1,6 +1,7 @@
 
 using Activity26.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace Activity26
 {
@@ -17,27 +18,7 @@ namespace Activity26
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<AppDBcontext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBconnection")));
-            //builder.Services.AddCors(option =>
-            //{
-            //    option.AddPolicy(
-            //        name: "CorsPolicy",
-            //        builder =>
-            //        {
-            //            builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod;
-            //        });
-            //});
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowAll",
-            //        builder =>
-            //        {
-            //            builder
-            //            .AllowAnyOrigin()
-            //            .AllowAnyMethod()
-            //            .AllowAnyHeader()
-            //            .AllowCredentials();
-            //        });
-            //});
+            
             const string policyName = "CorsPolicy";
             builder.Services.AddCors(options =>
             {
@@ -48,8 +29,11 @@ namespace Activity26
                         .AllowAnyMethod();
                 });
             });
-            builder.Services.AddControllers();
-           
+            builder.Services.AddControllers().AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
+
 
             var app = builder.Build();
 

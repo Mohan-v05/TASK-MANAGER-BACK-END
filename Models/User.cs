@@ -10,5 +10,9 @@ namespace Activity26.Models
         public string email { get; set; }
         public string phone { get; set; }
         public string password { get; set; }
+
+
+        public Address? Address { get; set; }
+        public ICollection<TaskItem>? TaskItem { get; set; }
     }
 }
