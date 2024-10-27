@@ -4,6 +4,7 @@ using Activity26.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Activity26.Migrations
 {
     [DbContext(typeof(AppDBcontext))]
-    partial class AppDBcontextModelSnapshot : ModelSnapshot
+    [Migration("20241027054809_Addess edited")]
+    partial class Addessedited
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,31 +55,6 @@ namespace Activity26.Migrations
                         .HasFilter("[userId] IS NOT NULL");
 
                     b.ToTable("Address");
-                });
-
-            modelBuilder.Entity("Activity26.Models.Checklist", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsDone")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TaskId");
-
-                    b.ToTable("Checklist");
                 });
 
             modelBuilder.Entity("Activity26.Models.TaskItem", b =>
@@ -145,36 +123,18 @@ namespace Activity26.Migrations
                 {
                     b.HasOne("Activity26.Models.User", "user")
                         .WithOne("Address")
-                        .HasForeignKey("Activity26.Models.Address", "userId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Activity26.Models.Address", "userId");
 
                     b.Navigation("user");
-                });
-
-            modelBuilder.Entity("Activity26.Models.Checklist", b =>
-                {
-                    b.HasOne("Activity26.Models.TaskItem", "Task")
-                        .WithMany("Checklist")
-                        .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Task");
                 });
 
             modelBuilder.Entity("Activity26.Models.TaskItem", b =>
                 {
                     b.HasOne("Activity26.Models.User", "User")
                         .WithMany("TaskItem")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Activity26.Models.TaskItem", b =>
-                {
-                    b.Navigation("Checklist");
                 });
 
             modelBuilder.Entity("Activity26.Models.User", b =>

@@ -25,7 +25,7 @@ namespace Activity26.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TaskItem>>> GetTaskItems()
         {
-            return await _context.TaskItems.ToListAsync();
+            return await _context.TaskItems.Include(t => t.User).ToListAsync();
         }
 
         // GET: api/TaskItems/5

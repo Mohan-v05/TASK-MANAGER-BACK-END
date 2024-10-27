@@ -14,8 +14,11 @@ namespace Activity26.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasMany(U => U.TaskItem).WithOne(T=>T.User).HasForeignKey(T=>T.UserId);
-            modelBuilder.Entity<User>().HasOne(U =>U.Address).WithOne(T=>T.user).HasForeignKey<Address>(A=>A.userId);
+            modelBuilder.Entity<User>().HasMany(U => U.TaskItem).WithOne(T=>T.User).HasForeignKey(T=>T.UserId).OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>().HasOne(U =>U.Address).WithOne(T=>T.user).HasForeignKey<Address>(A=>A.userId).OnDelete(DeleteBehavior.Cascade);
+            
+            modelBuilder.Entity<TaskItem>().HasMany(T =>T.Checklist).WithOne(C =>C.Task).HasForeignKey(c=>c.TaskId).OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }
