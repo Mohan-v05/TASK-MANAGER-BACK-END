@@ -913,3 +913,5 @@ C:\Users\UT01146\Desktop\TASK MANAGER\TASK-MANAGER-BACK-END\obj\Debug\net8.0\ref
 C:\Users\UT01146\Desktop\TASK MANAGER\TASK-MANAGER-BACK-END\obj\Debug\net8.0\Activity26.pdb
 C:\Users\UT01146\Desktop\TASK MANAGER\TASK-MANAGER-BACK-END\obj\Debug\net8.0\Activity26.genruntimeconfig.cache
 C:\Users\UT01146\Desktop\TASK MANAGER\TASK-MANAGER-BACK-END\obj\Debug\net8.0\ref\Activity26.dll
+C:\Users\UT01146\Desktop\TASK MANAGER\TASK-MANAGER-BACK-END\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\UT01146\Desktop\TASK MANAGER\TASK-MANAGER-BACK-END\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

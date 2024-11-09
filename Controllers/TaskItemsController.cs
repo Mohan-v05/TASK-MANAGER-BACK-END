@@ -25,14 +25,14 @@ namespace Activity26.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TaskItem>>> GetTaskItems()
         {
-            return await _context.TaskItems.Include(t => t.User).ToListAsync();
+            return await _context.TaskItems.Include(t => t.User).Include(t=>t.Checklist).ToListAsync();
         }
 
         // GET: api/TaskItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TaskItem>> GetTaskItem(int id)
         {
-            var taskItem = await _context.TaskItems.FindAsync(id);
+            var taskItem = await _context.TaskItems.Include(t => t.Checklist).FirstOrDefaultAsync(t=>t.Id==id);
 
             if (taskItem == null)
             {
@@ -80,8 +80,7 @@ namespace Activity26.Controllers
         {
             _context.TaskItems.Add(taskItem);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTaskItem", new { id = taskItem.Id }, taskItem);
+            return CreatedAtAction("GetTaskItem",new { id = taskItem.Id }, taskItem);
         }
 
         // DELETE: api/TaskItems/5
@@ -98,7 +97,7 @@ namespace Activity26.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+            }
 
         private bool TaskItemExists(int id)
         {

@@ -8,10 +8,8 @@ namespace Activity26.Data
     public class AppDBcontext:DbContext
     {
         public AppDBcontext(DbContextOptions<AppDBcontext> options) : base(options) { }
-
         public DbSet<TaskItem> TaskItems { get; set; }
         public DbSet<User> Users { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasMany(U => U.TaskItem).WithOne(T=>T.User).HasForeignKey(T=>T.UserId).OnDelete(DeleteBehavior.Cascade);
